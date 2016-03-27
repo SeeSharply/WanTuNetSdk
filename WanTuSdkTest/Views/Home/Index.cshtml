@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "阿里云多媒体服务上传测试";
+}
+<script src="~/Content/js/upfile.js"></script>
+<script src="~/Content/js/Common.js"></script>
+<div class="control-group" id="waitme" style="min-height:500px;">
+    <div class="controls">
+        本例子采用默认参数构造，token过期时间1个小时，文件名用阿里提供的占位符uuid生成唯一名字
+        <br />
+        关于自定义参数，请看源代码selfdefine,后期会完善
+        <br />
+        <input type="file" class="btn btn-primary" id="tileImg" value="选择图片" name="tileImg" style="width:200px;"/>
+        <br />
+        <input type="button" id="upload" class="btn btn-primary" value="上传展示图片"  style="width:100px;" />
+        <font style="font-size:14px;" class="alert add-on">请尽量上传比较清晰的图片以便效果良好</font>
+          
+    </div>
+    <div id="imgcontainer"></div>
+</div>
+<div>
+  
+    更多信息，请联系我qq843689653，微信
+    <br />
+    个人博客 <a href="http://www.seesharply.com" target="_blank" >锐眼看世界</a>
+</div>
+<div>
+    <img src="http://www.seesharply.com/Content/img/weixin.png"  style="width:200px;height:200px;"/>
+
+</div>
+<script>
+    $(document).ready(function () {
+        $("#upload").click(function () {
+            debugger;
+            var input = $("#tileImg");
+            var files = $("#tileImg").prop('files')
+            if (!files||files.length==0) {
+                alert("请选择图片");
+            }
+            else
+            {
+                doupload('@ViewBag.token',files);
+            }
+        });
+    });
+    var uploader = uploadJSSDK;
+    function doupload(token, files) {
+        run_waitMe();
+        //上传
+        uploader({
+            //如果token里面没配置的，则以这里为准
+            file: files[0],   //文件，必填,html5 file类型，不需要读数据流
+            token: token,  //token，必填
+            retries: 1,  //重试次数，选填，默认0不重试
+            maxSize: 0,  //上传大小限制，选填，默认0没有限制
+            callback: function (percent, result) {
+                if (percent < 0) {
+                    alert("上传失败" + data.code);
+                }
+                else if (percent < 100) {
+                    update_waitMe_percent(percent);
+                }
+                else if (percent == 100) {
+                    close_waitMe();
+                    if (result) {
+                        result = JSON.stringify(result);
+                        var data = JSON.parse(result);
+                        if (data.code == "OK") {
+                            var img = '<img src="' + data.url + '@Html.Raw("@")300w_200h_2e" style="width:300px;height:200px";/>';
+                            var div = "<div> 阿里云地址："+data.url+"</div>";
+                            $("#imgcontainer").html(img+div);
+                        }
+                        else {
+                            alert("上传失败" + data.code);
+                        }
+                    }
+                    else {
+                        update_waitMe_percent(percent);
+                    }
+                }
+                else {
+                    alert("获取阿里云服务信息失败");
+                }
+            }
+        })
+    }
+</script>
+
+
+

@@ -1,0 +1,6 @@
+c:\users\yu\documents\visual studio 2015\Projects\WanTuNetSdk\WanTuNetSdk\bin\Debug\WanTuNetSdk.dll
+c:\users\yu\documents\visual studio 2015\Projects\WanTuNetSdk\WanTuNetSdk\bin\Debug\WanTuNetSdk.pdb
+c:\users\yu\documents\visual studio 2015\Projects\WanTuNetSdk\WanTuNetSdk\bin\Debug\Newtonsoft.Json.dll
+c:\users\yu\documents\visual studio 2015\Projects\WanTuNetSdk\WanTuNetSdk\bin\Debug\Newtonsoft.Json.xml
+c:\users\yu\documents\visual studio 2015\Projects\WanTuNetSdk\WanTuNetSdk\obj\Debug\WanTuNetSdk.dll
+c:\users\yu\documents\visual studio 2015\Projects\WanTuNetSdk\WanTuNetSdk\obj\Debug\WanTuNetSdk.pdb
